@@ -1,0 +1,11 @@
+{
+  "name": "codelify",
+  "version": "1.0.0",
+  "description": "The backend API for codelify app",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Julien Bisconti <julienbi@unity3d.com>",
+  "license": "MIT"
+}
