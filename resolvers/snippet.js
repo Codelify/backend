@@ -4,13 +4,22 @@ const { validateCreateSnippet } = require('../middleware/snippetValidator');
 
 const snippetResolver = {
   Query: {
-    async getAllSnippets(root, args, { dataSources: { Snippet } }) {
+    async getAllSnippets(_, args, { dataSources: { Snippet } }) {
       return Snippet.getAllSnippets();
     },
 
     async getSnippetDetails(_, { snippetId }, { dataSources: { Snippet } }) {
       return Snippet.getSnippetDetails(snippetId);
     },
+    getAuthUserSnippets: combineResolvers(
+      isAuthenticated,
+      (_, __, { dataSources: { Snippet }, user }) => Snippet.getAuthUserSnippets(user),
+    ),
+
+    getSnippetsByUserId(_, { userId }, { dataSources: { Snippet } }) {
+      return Snippet.getSnippetsByUserId(userId);
+    },
+
   },
   Mutation: {
     createSnippet: combineResolvers(

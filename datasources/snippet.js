@@ -28,6 +28,18 @@ class Snippet extends DataSource {
       throw new ApolloError(err.message);
     }
   }
+
+  getAllSnippets() {
+    return this.models.Snippet.findAll();
+  }
+
+  getAuthUserSnippets(user) {
+    return this.models.Snippet.findAll({ where: { userId: user.id } });
+  }
+
+  getSnippetsByUserId(userId) {
+    return this.models.Snippet.findAll({ where: { userId } });
+  }
 }
 
 module.exports = Snippet;

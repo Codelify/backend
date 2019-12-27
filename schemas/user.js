@@ -6,7 +6,7 @@ const userSchema = gql`
         getUserById(userId: String!): User!
     }
     type User {
-        id: String!
+        id: Int!
         uid: String!
         email: String!
         firstName: String
@@ -35,7 +35,7 @@ const userSchema = gql`
     }
 
     type RegisterResponse {
-        id: String!
+        id: Int!
         uid: String!
         email: String!
         firstName: String
