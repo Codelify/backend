@@ -20,17 +20,20 @@ class User extends DataSource {
   }
 
   /**
- *
- *
- * @param {object} userData
- * @returns User
- * @memberof User
- * @throws ApolloError
- */
+   *
+   *
+   * @param {object} userData
+   * @returns User
+   * @memberof User
+   * @throws ApolloError
+   */
   async register(userData) {
     const user = await this.findBy('email', userData.email);
     if (user) {
-      throw new ApolloError('An account with the specified email already exists', 'CONFLICT');
+      throw new ApolloError(
+        'An account with the specified email already exists',
+        'CONFLICT',
+      );
     }
     try {
       const newUser = await this.models.User.create(userData);
@@ -42,25 +45,25 @@ class User extends DataSource {
   }
 
   /**
- * Find a user from the database with the given key/value
- *
- * @param {*} key - the attribute name
- * @param {*} value - the attribute value
- * @returns User | null
- * @memberof User
- */
+   * Find a user from the database with the given key/value
+   *
+   * @param {*} key - the attribute name
+   * @param {*} value - the attribute value
+   * @returns User | null
+   * @memberof User
+   */
   async findBy(key, value) {
     return this.models.User.findOne({ where: { [key]: value } });
   }
 
   /**
- * Log in user
- *
- * @param {string} { email, password }
- * @returns object
- * @memberof User
- * @throws ApolloError
- */
+   * Log in user
+   *
+   * @param {string} { email, password }
+   * @returns object
+   * @memberof User
+   * @throws ApolloError
+   */
   async login({ email, password }) {
     const user = await this.findBy('email', email);
     if (user) {
@@ -70,7 +73,22 @@ class User extends DataSource {
         return { ...user.get(), token };
       }
     }
-    throw new ApolloError('Invalid credential provided', 'INVALID_AUTH_CREDENTIAL');
+    throw new ApolloError(
+      'Invalid credential provided',
+      'INVALID_AUTH_CREDENTIAL',
+    );
+  }
+
+  getUserDetails(userId) {
+    return this.models.User.findOne({
+      where: { id: userId },
+      include: [
+        {
+          model: this.models.Snippet,
+          as: 'snippets',
+        },
+      ],
+    });
   }
 }
 

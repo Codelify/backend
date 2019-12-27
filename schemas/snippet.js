@@ -7,7 +7,6 @@ const snippetSchema = gql`
        getAuthUserSnippets: [Snippet!]!
        getSnippetDetails(snippetId: Int!): Snippet!
     }
-
     type Snippet {
         id: Int!
         uid: String!
@@ -17,6 +16,8 @@ const snippetSchema = gql`
         tags: [String!]
         sourceUrl: String
         lang: String
+        createdAt: DateTime!
+        owner: User!
     }
 
     extend type Mutation {

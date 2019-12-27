@@ -1,7 +1,6 @@
 const { gql } = require('apollo-server-express');
-const userTypes = require('./user.js');
-const snippetTypes = require('./snippet.js');
-
+const userTypes = require('./user');
+const snippetTypes = require('./snippet');
 
 const rootType = gql`
  type Query {
@@ -10,6 +9,8 @@ const rootType = gql`
  type Mutation {
      root: String
  }
+
+ scalar DateTime
 `;
 
 module.exports = [rootType, userTypes, snippetTypes];

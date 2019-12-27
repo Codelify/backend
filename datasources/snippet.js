@@ -45,7 +45,14 @@ class Snippet extends DataSource {
  * @memberof Snippet
  */
   getAllSnippets() {
-    return this.models.Snippet.findAll();
+    return this.models.Snippet.findAll({
+      include: [
+        {
+          model: this.models.User,
+          as: 'owner',
+        },
+      ],
+    });
   }
 
   /**
@@ -56,7 +63,15 @@ class Snippet extends DataSource {
  * @memberof Snippet
  */
   getAuthUserSnippets(user) {
-    return this.models.Snippet.findAll({ where: { userId: user.id } });
+    return this.models.Snippet.findAll({
+      where: { userId: user.id },
+      include: [
+        {
+          model: this.models.User,
+          as: 'owner',
+        },
+      ],
+    });
   }
 
   /**
@@ -67,7 +82,15 @@ class Snippet extends DataSource {
  * @memberof Snippet
  */
   getSnippetsByUserId(userId) {
-    return this.models.Snippet.findAll({ where: { userId } });
+    return this.models.Snippet.findAll({
+      where: { userId },
+      include: [
+        {
+          model: this.models.User,
+          as: 'owner',
+        },
+      ],
+    });
   }
 
   /**
@@ -78,7 +101,15 @@ class Snippet extends DataSource {
  * @memberof Snippet
  */
   getSnippetDetails(snippetId) {
-    return this.models.Snippet.findOne({ where: { id: snippetId } });
+    return this.models.Snippet.findOne({
+      where: { id: snippetId },
+      include: [
+        {
+          model: this.models.User,
+          as: 'owner',
+        },
+      ],
+    });
   }
 }
 

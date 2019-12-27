@@ -4,6 +4,7 @@ const userSchema = gql`
     extend type Query {
         getAllUsers: [User!]!
         getUserById(userId: String!): User!
+        getUserDetails: User!
     }
     type User {
         id: Int!
@@ -13,7 +14,8 @@ const userSchema = gql`
         lastName: String
         avatar: String
         password: String
-        snippets: [Snippet!]!
+        createdAt: DateTime
+        snippets: [Snippet!]
     }
 
     extend type Mutation {

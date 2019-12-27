@@ -19,7 +19,6 @@ const snippetResolver = {
     getSnippetsByUserId(_, { userId }, { dataSources: { Snippet } }) {
       return Snippet.getSnippetsByUserId(userId);
     },
-
   },
   Mutation: {
     createSnippet: combineResolvers(
@@ -31,6 +30,11 @@ const snippetResolver = {
           user,
         }) => Snippet.createSnippet(snippetData, user),
     ),
+  },
+  Snippet: {
+    owner(snippet) {
+      return snippet.getOwner();
+    },
   },
 };
 
