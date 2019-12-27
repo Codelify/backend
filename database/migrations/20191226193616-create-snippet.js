@@ -35,7 +35,7 @@ module.exports = {
       allowNull: true,
     },
     tags: {
-      type: Sequelize.ARRAY,
+      type: Sequelize.ARRAY(Sequelize.STRING),
       allowNull: true,
     },
     createdAt: {
