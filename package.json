@@ -9,6 +9,7 @@
   "author": "Julien Bisconti <julienbi@unity3d.com>",
   "license": "MIT",
   "dependencies": {
+    "apollo-server-express": "^2.9.14",
     "bcrypt": "^3.0.7",
     "dotenv": "^8.2.0",
     "pg": "^7.15.2",
