@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server-express');
 
 const userSchema = gql`
-    type Query {
+    extend type Query {
         getAllUsers: [User!]!
         getUserById(userId: String!): User!
     }
@@ -16,7 +16,7 @@ const userSchema = gql`
         snippets: [Snippet!]!
     }
 
-    type Mutation {
+    extend type Mutation {
         register(input: RegisterInput!): RegisterResponse!
         login(input: LoginInput): RegisterResponse!
     }

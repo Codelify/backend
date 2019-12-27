@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
       content: DataTypes.TEXT,
       lang: DataTypes.STRING,
       sourceUrl: DataTypes.STRING,
-      tags: DataTypes.ARRAY,
+      tags: DataTypes.ARRAY(DataTypes.STRING),
     },
     {},
   );

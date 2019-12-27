@@ -1,7 +1,7 @@
 const { gql } = require('apollo-server-express');
 
 const snippetSchema = gql`
-    type Query {
+    extend type Query {
        getAllSnippets: [Snippet!]!
        getUserSnippets(userId: String!): [Snippet!]!
        getSnippetDetails(snippetId: String!): Snippet!
@@ -18,8 +18,17 @@ const snippetSchema = gql`
         lang: String
     }
 
-    type Mutation {
+    extend type Mutation {
         createSnippet(input: SnippetInput!): Snippet!
+    }
+
+    input SnippetInput {
+        title: String
+        description: String
+        content: String
+        tags: [String!]
+        sourceUrl: String
+        lang: String
     }
 
 `;

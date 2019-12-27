@@ -4,7 +4,8 @@
   "description": "The backend API for codelify app",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "author": "Julien Bisconti <julienbi@unity3d.com>",
   "license": "MIT",
@@ -12,6 +13,7 @@
     "apollo-server-express": "^2.9.14",
     "bcrypt": "^3.0.7",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "pg": "^7.15.2",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.3"
@@ -19,6 +21,7 @@
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
-    "eslint-plugin-import": "^2.19.1"
+    "eslint-plugin-import": "^2.19.1",
+    "nodemon": "^2.0.2"
   }
 }
