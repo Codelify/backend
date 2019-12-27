@@ -2,7 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const Snippet = sequelize.define(
     'Snippet',
     {
-      uid: DataTypes.STRING,
+      uid: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4,
+      },
       userId: DataTypes.INTEGER,
       title: DataTypes.STRING,
       description: DataTypes.TEXT,
