@@ -1,5 +1,4 @@
+const userResolver = require('../resolvers/user');
+const snippetResolver = require('../resolvers/snippet');
 
-const resolvers = {
-
-};
-module.exports = resolvers;
+module.exports = [userResolver, snippetResolver];
