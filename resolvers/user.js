@@ -1,12 +1,20 @@
-
 const userResolver = {
   Query: {
-    async getAllUsers(root, args, { dataSource: { User } }) {
+    async getAllUsers(root, args, { dataSources: { User } }) {
       return User.getAllUsers();
     },
 
-    async getUserById(_, { userId }, { dataSource: { User } }) {
+    async getUserById(_, { userId }, { dataSources: { User } }) {
       return User.getUserById(userId);
+    },
+  },
+
+  Mutation: {
+    async register(_, { input: userData }, { dataSources: { User } }) {
+      return User.register(userData);
+    },
+    async login(_, { input: userData }, { dataSources: { User } }) {
+      return User.login(userData);
     },
   },
 };

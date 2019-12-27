@@ -3,6 +3,7 @@ const { ApolloServer } = require('apollo-server-express');
 const models = require('../database/models/');
 const typeDefs = require('../schemas/');
 const resolvers = require('../resolvers/');
+const dataSources = require('../datasources/');
 
 const app = express();
 
@@ -14,6 +15,7 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context,
+  dataSources,
 });
 
 server.applyMiddleware({ app });

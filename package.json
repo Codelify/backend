@@ -10,10 +10,13 @@
   "author": "Julien Bisconti <julienbi@unity3d.com>",
   "license": "MIT",
   "dependencies": {
+    "apollo-datasource": "^0.6.4",
     "apollo-server-express": "^2.9.14",
+    "auto-bind": "^4.0.0",
     "bcrypt": "^3.0.7",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^7.15.2",
     "pg-hstore": "^2.3.3",
     "sequelize": "^5.21.3"

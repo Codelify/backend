@@ -18,7 +18,7 @@ const userSchema = gql`
 
     extend type Mutation {
         register(input: RegisterInput!): RegisterResponse!
-        login(input: LoginInput): RegisterResponse!
+        login(input: LoginInput!): RegisterResponse!
     }
 
     input RegisterInput {
@@ -41,6 +41,7 @@ const userSchema = gql`
         firstName: String
         lastName: String
         avatar: String
+        token: String!
     }
 `;
 
