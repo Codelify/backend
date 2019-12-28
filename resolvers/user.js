@@ -23,6 +23,9 @@ const userResolver = {
     async login(_, { input: userData }, { dataSources: { User } }) {
       return User.login(userData);
     },
+    async authWithGoogle(_, { input }, { dataSources: { User } }) {
+      return User.authWithGoogle(input);
+    },
   },
   User: {
     snippets(user) {

@@ -1,8 +1,10 @@
+/* eslint-disable class-methods-use-this */
 require('dotenv').config();
 const { DataSource } = require('apollo-datasource');
 const autoBind = require('auto-bind');
 const { ApolloError } = require('apollo-server-express');
 const { generateToken } = require('../helpers/jwt');
+
 /**
  *
  *
@@ -89,6 +91,41 @@ class User extends DataSource {
         },
       ],
     });
+  }
+
+  /**
+ * Sign in with Google
+ *
+ * @param {*} {
+ *     email, firstName, lastName, avatar, password,
+ *   }
+ * @returns
+ * @memberof User
+ */
+  async authWithGoogle({
+    email, firstName, lastName, avatar, password,
+  }) {
+    try {
+      const user = await this.findBy('email', email);
+      if (user && user.validatePassword(password)) {
+        const token = generateToken({ _uid: user.uid });
+        return { ...user.get(), token };
+      }
+      const newUser = this.models.User.create({
+        email,
+        firstName,
+        lastName,
+        avatar,
+        password,
+      });
+      if (newUser) {
+        const token = generateToken({ _uid: newUser.uid });
+        return { ...newUser.get(), token };
+      }
+      throw new ApolloError('Authenticated failed');
+    } catch (err) {
+      throw new ApolloError(err.message);
+    }
   }
 }
 
