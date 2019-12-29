@@ -23,6 +23,8 @@ const server = new ApolloServer({
   resolvers,
   context,
   dataSources,
+  introspection: true,
+  playground: true,
 });
 
 server.applyMiddleware({ app });
