@@ -1,13 +1,19 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const { ApolloServer } = require('apollo-server-express');
 const models = require('../database/models/');
 const typeDefs = require('../schemas/');
 const resolvers = require('../resolvers/');
 const dataSources = require('../datasources/');
 const { verifyUserToken } = require('../helpers/jwt');
+const routes = require('../routes/');
 
 const app = express();
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+app.use(routes);
 const context = async ({ req }) => {
   const token = (req.headers && req.headers.authorization) || '';
   const user = await verifyUserToken(token);
