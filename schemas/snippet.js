@@ -22,6 +22,7 @@ const snippetSchema = gql`
 
     extend type Mutation {
         createSnippet(input: SnippetInput!): Snippet!
+        deleteSnippet(snippetId: Int!): SuccessResponse
     }
 
     input SnippetInput {
@@ -31,6 +32,11 @@ const snippetSchema = gql`
         tags: [String!]
         sourceUrl: String
         lang: String
+    }
+
+    type SuccessResponse {
+        message: String!
+        status: String!
     }
 
 `;

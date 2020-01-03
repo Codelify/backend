@@ -1,7 +1,7 @@
 require('dotenv').config();
 const { DataSource } = require('apollo-datasource');
 const autoBind = require('auto-bind');
-const { ApolloError } = require('apollo-server-express');
+const { ApolloError, ForbiddenError } = require('apollo-server-express');
 
 /**
  *
@@ -110,6 +110,22 @@ class Snippet extends DataSource {
         },
       ],
     });
+  }
+
+  async deleteSnippet(snippetId, user) {
+    const snippet = await this.models.Snippet.findOne({ where: { id: snippetId } });
+    if (!snippet) {
+      throw new ApolloError('Snippet with the specified ID was not found');
+    }
+    if (snippet.userId !== user.id) {
+      throw new ForbiddenError('You can only delete a snippet created by you');
+    }
+    try {
+      await snippet.destroy();
+      return { status: 'success', message: 'Snippet deleted successfully' };
+    } catch (err) {
+      throw new ApolloError(err.message);
+    }
   }
 }
 

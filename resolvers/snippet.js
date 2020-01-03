@@ -30,6 +30,14 @@ const snippetResolver = {
           user,
         }) => Snippet.createSnippet(snippetData, user),
     ),
+    deleteSnippet: combineResolvers(
+      isAuthenticated,
+      (_, { snippetId },
+        {
+          dataSources: { Snippet },
+          user,
+        }) => Snippet.deleteSnippet(snippetId, user),
+    ),
   },
   Snippet: {
     owner(snippet) {
