@@ -1,5 +1,6 @@
 const { skip } = require('graphql-resolvers');
 const { AuthenticationError } = require('apollo-server-express');
+const { verifyUserToken } = require('../helpers/jwt');
 
 /**
  *
@@ -9,7 +10,8 @@ const { AuthenticationError } = require('apollo-server-express');
  * @param {*} { user }
  * @returns
  */
-const isAuthenticated = (_, args, { user }) => {
+const isAuthenticated = async (_, { token = '' }) => {
+  const user = await verifyUserToken(token);
   if (!user) {
     throw new AuthenticationError(
       'Unauthorized Request, Authentication required',

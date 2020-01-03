@@ -13,7 +13,7 @@ const snippetResolver = {
     },
     getAuthUserSnippets: combineResolvers(
       isAuthenticated,
-      (_, __, { dataSources: { Snippet }, user }) => Snippet.getAuthUserSnippets(user),
+      (_, { token = '' }, { dataSources: { Snippet } }) => Snippet.getAuthUserSnippets(token),
     ),
 
     getSnippetsByUserId(_, { userId }, { dataSources: { Snippet } }) {
@@ -24,19 +24,17 @@ const snippetResolver = {
     createSnippet: combineResolvers(
       isAuthenticated,
       validateCreateSnippet,
-      (_, { input: snippetData },
+      (_, { input: snippetData, token = '' },
         {
           dataSources: { Snippet },
-          user,
-        }) => Snippet.createSnippet(snippetData, user),
+        }) => Snippet.createSnippet(snippetData, token),
     ),
     deleteSnippet: combineResolvers(
       isAuthenticated,
-      (_, { snippetId },
+      (_, { snippetId, token = '' },
         {
           dataSources: { Snippet },
-          user,
-        }) => Snippet.deleteSnippet(snippetId, user),
+        }) => Snippet.deleteSnippet(snippetId, token),
     ),
   },
   Snippet: {

@@ -2,6 +2,7 @@ require('dotenv').config();
 const { DataSource } = require('apollo-datasource');
 const autoBind = require('auto-bind');
 const { ApolloError, ForbiddenError } = require('apollo-server-express');
+const { verifyUserToken } = require('../helpers/jwt');
 
 /**
  *
@@ -27,8 +28,9 @@ class Snippet extends DataSource {
    * @returns
    * @memberof Snippet
    */
-  createSnippet(snippetData, user) {
+  async createSnippet(snippetData, token) {
     try {
+      const user = await verifyUserToken(token);
       return this.models.Snippet.create({
         ...snippetData,
         userId: user.id,
@@ -62,7 +64,8 @@ class Snippet extends DataSource {
  * @returns
  * @memberof Snippet
  */
-  getAuthUserSnippets(user) {
+  async getAuthUserSnippets(token) {
+    const user = await verifyUserToken(token);
     return this.models.Snippet.findAll({
       where: { userId: user.id },
       include: [
@@ -112,7 +115,8 @@ class Snippet extends DataSource {
     });
   }
 
-  async deleteSnippet(snippetId, user) {
+  async deleteSnippet(snippetId, token) {
+    const user = await verifyUserToken(token);
     const snippet = await this.models.Snippet.findOne({ where: { id: snippetId } });
     if (!snippet) {
       throw new ApolloError('Snippet with the specified ID was not found');

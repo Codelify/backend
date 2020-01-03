@@ -4,7 +4,7 @@ const snippetSchema = gql`
     extend type Query {
        getAllSnippets: [Snippet!]!
        getSnippetsByUserId(userId: Int!): [Snippet!]!
-       getAuthUserSnippets: [Snippet!]!
+       getAuthUserSnippets(token: String!): [Snippet!]!
        getSnippetDetails(snippetId: Int!): Snippet!
     }
     type Snippet {
@@ -21,8 +21,8 @@ const snippetSchema = gql`
     }
 
     extend type Mutation {
-        createSnippet(input: SnippetInput!): Snippet!
-        deleteSnippet(snippetId: Int!): SuccessResponse
+        createSnippet(input: SnippetInput!, token: String!): Snippet!
+        deleteSnippet(snippetId: Int!, token: String!): SuccessResponse
     }
 
     input SnippetInput {
