@@ -36,6 +36,13 @@ const snippetResolver = {
           dataSources: { Snippet },
         }) => Snippet.deleteSnippet(snippetId, token),
     ),
+    updateSnippet: combineResolvers(
+      isAuthenticated,
+      (_, { snippetId, input, token = '' },
+        {
+          dataSources: { Snippet },
+        }) => Snippet.updateSnippet(snippetId, input, token),
+    ),
   },
   Snippet: {
     owner(snippet) {
