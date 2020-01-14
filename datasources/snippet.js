@@ -131,6 +131,26 @@ class Snippet extends DataSource {
       throw new ApolloError(err.message);
     }
   }
+
+  async updateSnippet(snippetId, snippetData, token) {
+    const user = await verifyUserToken(token);
+    const snippet = await this.models.Snippet.findOne({ where: { id: snippetId } });
+    if (!snippet) {
+      throw new ApolloError('Snippet with the specified ID was not found');
+    }
+    if (snippet.userId !== user.id) {
+      throw new ForbiddenError('You can only delete a snippet created by you');
+    }
+    try {
+      const updatedSnippet = await snippet.update(snippetData);
+      if (updatedSnippet) {
+        return updatedSnippet;
+      }
+      throw new ApolloError('Snippet could not be updated!');
+    } catch (err) {
+      throw new ApolloError(err.message);
+    }
+  }
 }
 
 module.exports = Snippet;

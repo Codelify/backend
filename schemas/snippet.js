@@ -23,6 +23,7 @@ const snippetSchema = gql`
     extend type Mutation {
         createSnippet(input: SnippetInput!, token: String!): Snippet!
         deleteSnippet(snippetId: Int!, token: String!): SuccessResponse
+        updateSnippet(snippetId: Int!, input: SnippetInput!, token: String!): Snippet
     }
 
     input SnippetInput {
