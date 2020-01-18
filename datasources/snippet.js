@@ -74,6 +74,9 @@ class Snippet extends DataSource {
           as: 'owner',
         },
       ],
+      order: [
+        ['createdAt', 'DESC'],
+      ],
     });
   }
 
@@ -92,6 +95,9 @@ class Snippet extends DataSource {
           model: this.models.User,
           as: 'owner',
         },
+      ],
+      order: [
+        ['createdAt', 'DESC'],
       ],
     });
   }
