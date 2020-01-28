@@ -35,6 +35,7 @@ const snippetSchema = gql`
         tags: [String!]
         sourceUrl: String
         lang: String
+        isFav: Boolean
     }
 
     type SuccessResponse {

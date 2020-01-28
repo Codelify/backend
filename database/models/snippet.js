@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       lang: DataTypes.STRING,
       sourceUrl: DataTypes.STRING,
       tags: DataTypes.ARRAY(DataTypes.STRING),
-      isFav: DataTypes.Boolean,
+      isFav: DataTypes.BOOLEAN,
       archivedAt: DataTypes.DATE,
     },
     {},
