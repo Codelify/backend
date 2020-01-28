@@ -13,10 +13,12 @@ module.exports = (sequelize, DataTypes) => {
       lang: DataTypes.STRING,
       sourceUrl: DataTypes.STRING,
       tags: DataTypes.ARRAY(DataTypes.STRING),
+      isFav: DataTypes.BOOLEAN,
+      archivedAt: DataTypes.DATE,
     },
     {},
   );
-  Snippet.associate = function(models) {
+  Snippet.associate = (models) => {
     Snippet.belongsTo(models.User, {
       foreignKey: 'userId',
       as: 'owner',
