@@ -18,6 +18,8 @@ const snippetSchema = gql`
         lang: String
         createdAt: DateTime!
         owner: User!
+        isFav: Boolean
+        archivedAt: DateTime
     }
 
     extend type Mutation {
