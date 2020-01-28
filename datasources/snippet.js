@@ -131,8 +131,8 @@ class Snippet extends DataSource {
       throw new ForbiddenError('You can only delete a snippet created by you');
     }
     try {
-      await snippet.destroy();
-      return { status: 'success', message: 'Snippet deleted successfully' };
+      snippet.update({ archivedAt: Date.now() });
+      return { status: 'success', message: 'Snippet archived successfully' };
     } catch (err) {
       throw new ApolloError(err.message);
     }
