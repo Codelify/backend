@@ -121,7 +121,7 @@ class Snippet extends DataSource {
     });
   }
 
-  async deleteSnippet(snippetId, token) {
+  async deleteSnippet({ snippetId, archive = true }, token) {
     const user = await verifyUserToken(token);
     const snippet = await this.models.Snippet.findOne({ where: { id: snippetId } });
     if (!snippet) {
@@ -131,6 +131,10 @@ class Snippet extends DataSource {
       throw new ForbiddenError('You can only delete a snippet created by you');
     }
     try {
+      if (!archive) {
+        snippet.destroy();
+        return { status: 'success', message: 'Snippet deleted successfully' };
+      }
       snippet.update({ archivedAt: Date.now() });
       return { status: 'success', message: 'Snippet archived successfully' };
     } catch (err) {

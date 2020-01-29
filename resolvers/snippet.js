@@ -31,10 +31,10 @@ const snippetResolver = {
     ),
     deleteSnippet: combineResolvers(
       isAuthenticated,
-      (_, { snippetId, token = '' },
+      (_, { snippetId, token = '', archive = true },
         {
           dataSources: { Snippet },
-        }) => Snippet.deleteSnippet(snippetId, token),
+        }) => Snippet.deleteSnippet({ snippetId, archive }, token),
     ),
     updateSnippet: combineResolvers(
       isAuthenticated,
