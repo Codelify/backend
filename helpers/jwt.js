@@ -15,6 +15,7 @@ const generateToken = (payload) => {
   });
   return token;
 };
+
 /**
  * Decodes user token
  *
