@@ -108,10 +108,11 @@ class User extends DataSource {
     try {
       const user = await this.findBy('email', email);
       if (user && user.validatePassword(password)) {
+        await user.update({ firstName, lastName, avatar });
         const token = generateToken({ _uid: user.uid });
         return { ...user.get(), token };
       }
-      const newUser = this.models.User.create({
+      const newUser = await this.models.User.create({
         email,
         firstName,
         lastName,
