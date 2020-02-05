@@ -12,7 +12,7 @@ const userResolver = {
     },
     getUserDetails: combineResolvers(
       isAuthenticated,
-      (_, __, { dataSources: { User }, user }) => User.getUserDetails(user.id),
+      (_, { token }, { dataSources: { User } }) => User.getUserDetails(token),
     ),
   },
 
