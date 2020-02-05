@@ -3,7 +3,8 @@ require('dotenv').config();
 const { DataSource } = require('apollo-datasource');
 const autoBind = require('auto-bind');
 const { ApolloError } = require('apollo-server-express');
-const { generateToken } = require('../helpers/jwt');
+const { generateToken, verifyUserToken } = require('../helpers/jwt');
+
 
 /**
  *
@@ -81,9 +82,10 @@ class User extends DataSource {
     );
   }
 
-  getUserDetails(userId) {
+  async getUserDetails(token) {
+    const user = await verifyUserToken(token);
     return this.models.User.findOne({
-      where: { id: userId },
+      where: { id: user.id },
       include: [
         {
           model: this.models.Snippet,

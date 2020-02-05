@@ -4,7 +4,7 @@ const userSchema = gql`
     extend type Query {
         getAllUsers: [User!]!
         getUserById(userId: String!): User!
-        getUserDetails: User!
+        getUserDetails(token: String!): User!
     }
     type User {
         id: Int!
