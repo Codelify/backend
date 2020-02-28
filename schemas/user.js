@@ -6,6 +6,14 @@ const userSchema = gql`
         getUserById(userId: String!): User!
         getUserDetails(token: String!): User!
     }
+    input ProfileInput {
+        firstName: String
+        lastName: String
+        avatar: String
+        twitter: String
+        linkedin: String
+        bio: String
+    }
     type User {
         id: Int!
         uid: String!
@@ -25,6 +33,7 @@ const userSchema = gql`
         register(input: RegisterInput!): RegisterResponse!
         login(input: LoginInput!): RegisterResponse!
         authWithGoogle(input: RegisterInput!): RegisterResponse!
+        updateProfile(token: String!, input: ProfileInput!): User!
     }
 
     input RegisterInput {
