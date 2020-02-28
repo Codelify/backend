@@ -26,6 +26,9 @@ const userResolver = {
     async authWithGoogle(_, { input }, { dataSources: { User } }) {
       return User.authWithGoogle(input);
     },
+    async updateProfile(_, { token, input }, { dataSources: { User } }) {
+      return User.updateProfile(input, token);
+    },
   },
   User: {
     snippets(user) {

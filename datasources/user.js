@@ -130,6 +130,15 @@ class User extends DataSource {
       throw new ApolloError(err.message);
     }
   }
+
+  async updateProfile(userData, token) {
+    try {
+      const user = await verifyUserToken(token);
+      return user.update(userData);
+    } catch (err) {
+      throw new ApolloError(err.message);
+    }
+  }
 }
 
 module.exports = User;
