@@ -16,6 +16,9 @@ const userSchema = gql`
         password: String
         createdAt: DateTime
         snippets: [Snippet!]
+        twitter: String
+        linkedin: String
+        bio: String
     }
 
     extend type Mutation {
@@ -30,6 +33,9 @@ const userSchema = gql`
         lastName: String
         avatar: String
         password: String!
+        twitter: String
+        linkedin: String
+        bio: String
     }
 
     input LoginInput {
@@ -45,6 +51,9 @@ const userSchema = gql`
         lastName: String
         avatar: String
         token: String!
+        twitter: String
+        linkedin: String
+        bio: String
     }
 `;
 
