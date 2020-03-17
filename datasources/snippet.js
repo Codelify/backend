@@ -3,6 +3,7 @@ const { DataSource } = require('apollo-datasource');
 const autoBind = require('auto-bind');
 const { ApolloError, ForbiddenError } = require('apollo-server-express');
 const { verifyUserToken } = require('../helpers/jwt');
+const { decrypt } = require('../helpers/crypto');
 
 /**
  *
@@ -110,8 +111,9 @@ class Snippet extends DataSource {
  * @memberof Snippet
  */
   getSnippetDetails(snippetId) {
+    const id = Number(snippetId) ? snippetId : decrypt(snippetId);
     return this.models.Snippet.findOne({
-      where: { id: snippetId },
+      where: { id },
       include: [
         {
           model: this.models.User,
