@@ -1,4 +1,4 @@
-const { encrypt, decrypt } = require('../../helpers/crypto');
+const { encrypt } = require('../../helpers/crypto');
 
 module.exports = (sequelize, DataTypes) => {
   const Snippet = sequelize.define(
