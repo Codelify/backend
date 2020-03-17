@@ -5,7 +5,7 @@ const snippetSchema = gql`
        getAllSnippets: [Snippet!]!
        getSnippetsByUserId(userId: Int!): [Snippet!]!
        getAuthUserSnippets(token: String!): [Snippet!]!
-       getSnippetDetails(snippetId: Int!): Snippet!
+       getSnippetDetails(snippetId: String!): Snippet!
     }
     type Snippet {
         id: Int!
