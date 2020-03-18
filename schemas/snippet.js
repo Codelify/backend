@@ -20,6 +20,7 @@ const snippetSchema = gql`
         owner: User!
         isFav: Boolean
         archivedAt: DateTime
+        isPublic: Boolean
     }
 
     extend type Mutation {
