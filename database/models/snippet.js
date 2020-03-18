@@ -18,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
       isFav: DataTypes.BOOLEAN,
       archivedAt: DataTypes.DATE,
       shareId: DataTypes.STRING,
+      isPublic: DataTypes.BOOLEAN,
     },
     {},
   );
