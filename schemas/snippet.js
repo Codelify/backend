@@ -21,6 +21,7 @@ const snippetSchema = gql`
         isFav: Boolean
         archivedAt: DateTime
         isPublic: Boolean
+        shareId: String
     }
 
     extend type Mutation {
