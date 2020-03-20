@@ -38,6 +38,7 @@ const snippetSchema = gql`
         sourceUrl: String
         lang: String
         isFav: Boolean
+        isPublic: Boolean
         archivedAt: DateTime
     }
 
