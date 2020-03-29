@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { ApolloServer } = require('apollo-server-express');
+const cors = require('cors');
 const models = require('../database/models/');
 const typeDefs = require('../schemas/');
 const resolvers = require('../resolvers/');
@@ -10,6 +11,7 @@ const routes = require('../routes/');
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
