@@ -1,12 +1,16 @@
 require('dotenv').config();
 const express = require('express');
 const axios = require('axios');
+const fs = require('fs');
 
+const ba64 = require('ba64');
+const path = require('path');
 const { WebClient } = require('@slack/web-api');
 const { snippetView, storeSnippet } = require('../slack/helper');
 
 const config = require('../config/');
-const models = require('../database/models/');
+
+const twitterClient = require('../config/twitter');
 
 const router = express.Router();
 
@@ -64,7 +68,6 @@ router.post('/slack/interactions', async (req, res) => {
 router.get('/slack/auth', async (req, res) => {
   const { code } = req.query;
   if (code) {
-    console.log(code);
     const {
       slack: { clientId, secret },
     } = config;
@@ -79,6 +82,63 @@ router.get('/slack/auth', async (req, res) => {
     res.status(200).send({
       id, email, name, avatar,
     });
+  }
+});
+
+/**
+ * Twitter
+ */
+const deleteImage = (imagePath) => {
+  if (fs.existsSync(imagePath)) {
+    // file exists
+    fs.unlink(imagePath, () => {});
+  }
+};
+
+router.post('/imagetotweet', async (req, res) => {
+  const { dataUrl, shareId } = req.body;
+  const imageName = Date.now();
+  const imagePath = path.join(__dirname, `../static/${imageName}`);
+  try {
+    ba64.writeImage(imagePath, dataUrl, (err) => {
+      if (!err) {
+        fs.readFile(`${imagePath}.png`, (fileReadError, image) => {
+          if (!fileReadError) {
+            twitterClient.post(
+              'media/upload',
+              {
+                media: image,
+              },
+              (mediaError, media) => {
+                if (!mediaError) {
+                  const status = {
+                    status: `Codelify image - ShareId ${shareId}`,
+                    media_ids: media.media_id_string,
+                  };
+                  twitterClient.post('statuses/update', status, (statusError, response) => {
+                    if (!statusError) {
+                      deleteImage(`${imagePath}.png`);
+                      res.status(200).json({
+                        message: response.entities.media[0].display_url,
+                      });
+                    }
+                  });
+                } else {
+                  throw mediaError;
+                }
+              },
+            );
+          } else {
+            throw fileReadError;
+          }
+        });
+      } else {
+        throw err;
+      }
+    });
+  } catch (error) {
+    deleteImage(`${imagePath}.png`);
+    res.status(500).json({ error: error.message });
   }
 });
 
