@@ -98,7 +98,7 @@ const deleteImage = (imagePath) => {
 router.post('/imagetotweet', async (req, res) => {
   const { dataUrl, shareId } = req.body;
   const imageName = Date.now();
-  const imagePath = path.join(__dirname, `../static/${imageName}`);
+  const imagePath = path.join(__dirname, `../static/tweet-images/${imageName}`);
   try {
     ba64.writeImage(imagePath, dataUrl, (err) => {
       if (!err) {
