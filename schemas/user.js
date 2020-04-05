@@ -13,6 +13,7 @@ const userSchema = gql`
         twitter: String
         linkedin: String
         bio: String
+        enableNewsletter: Boolean
     }
     type User {
         id: Int!
@@ -27,6 +28,7 @@ const userSchema = gql`
         twitter: String
         linkedin: String
         bio: String
+        enableNewsletter: Boolean
     }
 
     extend type Mutation {

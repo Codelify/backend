@@ -6,9 +6,9 @@ const encrypt = (data) => {
 };
 
 const decrypt = (data) => {
-  const decrypted = Buffer.from(data, 'base64').toString('ascii');
-  const id = decrypted.split('-!')[0];
+  const id = Buffer.from(data.split('-!')[0], 'base64').toString('ascii');
   return Number(id);
 };
+
 
 module.exports = { encrypt, decrypt };

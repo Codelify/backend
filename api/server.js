@@ -1,15 +1,21 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { ApolloServer } = require('apollo-server-express');
+const cors = require('cors');
+const morgan = require('morgan');
 const models = require('../database/models/');
 const typeDefs = require('../schemas/');
 const resolvers = require('../resolvers/');
 const dataSources = require('../datasources/');
 const { verifyUserToken } = require('../helpers/jwt');
 const routes = require('../routes/');
+const logger = require('../config/winston');
 
 const app = express();
 
+
+app.use(morgan('combined', { stream: logger.stream }));
+app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
