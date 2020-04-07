@@ -12,6 +12,7 @@ const userSchema = gql`
         avatar: String
         twitter: String
         linkedin: String
+        github: String
         bio: String
         enableNewsletter: Boolean
     }
@@ -29,6 +30,7 @@ const userSchema = gql`
         linkedin: String
         bio: String
         enableNewsletter: Boolean
+        github: String
     }
 
     extend type Mutation {

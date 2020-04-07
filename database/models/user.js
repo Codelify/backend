@@ -25,6 +25,10 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      github: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       bio: {
         type: DataTypes.TEXT,
         allowNull: true,
@@ -41,6 +45,10 @@ module.exports = (sequelize, DataTypes) => {
       avatar: {
         type: DataTypes.STRING,
         allowNull: true,
+      },
+      enableNewsletter: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
       },
     },
     {
