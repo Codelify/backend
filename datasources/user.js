@@ -105,12 +105,14 @@ class User extends DataSource {
  * @memberof User
  */
   async authWithGoogle({
-    email, firstName, lastName, avatar, password,
+    email, firstName, lastName, avatar, password, gitUsername = '', gitAccessToken = '', bio = '',
   }) {
     try {
       const user = await this.findBy('email', email);
       if (user && user.validatePassword(password)) {
-        await user.update({ firstName, lastName, avatar });
+        await user.update({
+          firstName, lastName, avatar, gitUsername, gitAccessToken, bio,
+        });
         const token = generateToken({ _uid: user.uid });
         return { ...user.get(), token };
       }
@@ -120,6 +122,9 @@ class User extends DataSource {
         lastName,
         avatar,
         password,
+        gitAccessToken,
+        gitUsername,
+        bio,
       });
       if (newUser) {
         const token = generateToken({ _uid: newUser.uid });
