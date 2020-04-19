@@ -46,6 +46,14 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: true,
       },
+      gitAccessToken: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      gitUsername: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       enableNewsletter: {
         type: DataTypes.BOOLEAN,
         defaultValue: true,

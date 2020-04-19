@@ -31,6 +31,8 @@ const userSchema = gql`
         bio: String
         enableNewsletter: Boolean
         github: String
+        gitAccessToken: String
+        gitUsername: String
     }
 
     extend type Mutation {
@@ -48,7 +50,10 @@ const userSchema = gql`
         password: String!
         twitter: String
         linkedin: String
+        github: String
         bio: String
+        gitUsername: String
+        gitAccessToken: String
     }
 
     input LoginInput {
@@ -66,7 +71,10 @@ const userSchema = gql`
         token: String!
         twitter: String
         linkedin: String
+        github: String
         bio: String
+        gitUsername: String
+        gitAccessToken: String
     }
 `;
 
