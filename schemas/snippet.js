@@ -22,6 +22,7 @@ const snippetSchema = gql`
         archivedAt: DateTime
         isPublic: Boolean
         shareId: String
+        gistId: String
     }
 
     extend type Mutation {
@@ -40,6 +41,7 @@ const snippetSchema = gql`
         isFav: Boolean
         isPublic: Boolean
         archivedAt: DateTime
+        gistId: String
     }
 
     type SuccessResponse {

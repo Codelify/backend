@@ -19,6 +19,7 @@ module.exports = (sequelize, DataTypes) => {
       archivedAt: DataTypes.DATE,
       shareId: DataTypes.STRING,
       isPublic: DataTypes.BOOLEAN,
+      gistId: DataTypes.STRING,
     },
     {},
   );

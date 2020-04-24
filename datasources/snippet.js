@@ -32,6 +32,18 @@ class Snippet extends DataSource {
   async createSnippet(snippetData, token) {
     try {
       const user = await verifyUserToken(token);
+      if (snippetData.gistId) {
+        const snippet = await this.models.Snippet.findOne({
+          where: { gistId: snippetData.gistId },
+        });
+        if (!snippet) {
+          return this.models.Snippet.create({
+            ...snippetData,
+            userId: user.id,
+          });
+        }
+        return snippet;
+      }
       return this.models.Snippet.create({
         ...snippetData,
         userId: user.id,
@@ -42,11 +54,11 @@ class Snippet extends DataSource {
   }
 
   /**
- * Get all snippets
- *
- * @returns
- * @memberof Snippet
- */
+   * Get all snippets
+   *
+   * @returns
+   * @memberof Snippet
+   */
   getAllSnippets() {
     return this.models.Snippet.findAll({
       include: [
@@ -59,12 +71,12 @@ class Snippet extends DataSource {
   }
 
   /**
- * Get the snippets of the logged in user
- *
- * @param {*} user
- * @returns
- * @memberof Snippet
- */
+   * Get the snippets of the logged in user
+   *
+   * @param {*} user
+   * @returns
+   * @memberof Snippet
+   */
   async getAuthUserSnippets(token) {
     const user = await verifyUserToken(token);
     return this.models.Snippet.findAll({
@@ -75,19 +87,17 @@ class Snippet extends DataSource {
           as: 'owner',
         },
       ],
-      order: [
-        ['createdAt', 'DESC'],
-      ],
+      order: [['createdAt', 'DESC']],
     });
   }
 
   /**
- * Get snippets by userId
- *
- * @param {*} userId
- * @returns
- * @memberof Snippet
- */
+   * Get snippets by userId
+   *
+   * @param {*} userId
+   * @returns
+   * @memberof Snippet
+   */
   getSnippetsByUserId(userId) {
     return this.models.Snippet.findAll({
       where: { userId },
@@ -97,19 +107,17 @@ class Snippet extends DataSource {
           as: 'owner',
         },
       ],
-      order: [
-        ['createdAt', 'DESC'],
-      ],
+      order: [['createdAt', 'DESC']],
     });
   }
 
   /**
- * Get a single snippet details
- *
- * @param {*} snippetId
- * @returns
- * @memberof Snippet
- */
+   * Get a single snippet details
+   *
+   * @param {*} snippetId
+   * @returns
+   * @memberof Snippet
+   */
   getSnippetDetails(snippetId) {
     const id = Number(snippetId) ? snippetId : decrypt(snippetId);
     return this.models.Snippet.findOne({
@@ -125,7 +133,9 @@ class Snippet extends DataSource {
 
   async deleteSnippet({ snippetId, archive = true }, token) {
     const user = await verifyUserToken(token);
-    const snippet = await this.models.Snippet.findOne({ where: { id: snippetId } });
+    const snippet = await this.models.Snippet.findOne({
+      where: { id: snippetId },
+    });
     if (!snippet) {
       throw new ApolloError('Snippet with the specified ID was not found');
     }
@@ -146,7 +156,9 @@ class Snippet extends DataSource {
 
   async updateSnippet(snippetId, snippetData, token) {
     const user = await verifyUserToken(token);
-    const snippet = await this.models.Snippet.findOne({ where: { id: snippetId } });
+    const snippet = await this.models.Snippet.findOne({
+      where: { id: snippetId },
+    });
     if (!snippet) {
       throw new ApolloError('Snippet with the specified ID was not found');
     }
