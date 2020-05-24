@@ -2,7 +2,6 @@ const { GraphQLScalarType } = require('graphql/type');
 const { Kind } = require('graphql/language');
 const userResolver = require('../resolvers/user');
 const snippetResolver = require('../resolvers/snippet');
-const merchantResolver = require('../resolvers/merchant');
 
 const dateResolver = {
   DateTime: new GraphQLScalarType({
@@ -23,4 +22,4 @@ const dateResolver = {
   }),
 };
 
-module.exports = [dateResolver, userResolver, snippetResolver, merchantResolver];
+module.exports = [dateResolver, userResolver, snippetResolver];

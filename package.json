@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "The backend API for codelify app",
   "main": "index.js",
+  "engines": { "node" : "12.16.1" },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
