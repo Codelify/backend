@@ -1,6 +1,7 @@
 const { gql } = require('apollo-server-express');
 const userTypes = require('./user');
 const snippetTypes = require('./snippet');
+const merchantTypes = require('./merchant');
 
 const rootType = gql`
  type Query {
@@ -13,4 +14,4 @@ const rootType = gql`
  scalar DateTime
 `;
 
-module.exports = [rootType, userTypes, snippetTypes];
+module.exports = [rootType, userTypes, snippetTypes, merchantTypes];
