@@ -58,3 +58,4 @@ yarn.lock
 .env
 .DS_Store
 ./.docker/dev/.dev.env
+.
