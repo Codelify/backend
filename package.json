@@ -8,8 +8,10 @@
     "dev": "nodemon index.js",
     "migrate": "npx sequelize-cli db:migrate",
     "sh": "node util/util.js",
-    "test": "jest --detectOpenHandles --testTimeout=10000 --forceExit",
-    "coverage": "jest --coverage --detectOpenHandles --testTimeout=10000 && cat ./coverage/lcov.info | coveralls"
+    "migrate:reset": "npx sequelize-cli db:migrate:undo:all",
+    "pretest": "export NODE_ENV=test && npx sequelize-cli db:migrate",
+    "test": "export NODE_ENV=test && jest --detectOpenHandles --testTimeout=10000 --forceExit",
+    "coverage": "jest --coverage --detectOpenHandles  --testTimeout=10000 && cat ./coverage/lcov.info | coveralls"
   },
   "author": "Chinedu Orie <nedsoftdeveloper@gmail.com>",
   "license": "MIT",
@@ -35,6 +37,7 @@
     "sequelize": "^5.21.3",
     "twitter": "^1.7.1",
     "uuid": "^7.0.2",
+    "validator": "^13.0.0",
     "winston": "^3.2.1"
   },
   "jest": {
