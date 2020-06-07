@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const { createServer } = require('http');
 const { ApolloServer } = require('apollo-server-express');
 const cors = require('cors');
 const morgan = require('morgan');
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.use(routes);
+
 const context = async ({ req }) => {
   const token = (req.headers && req.headers.authorization) || '';
   const user = await verifyUserToken(token);
@@ -30,16 +32,22 @@ const context = async ({ req }) => {
   };
 };
 
-const server = new ApolloServer({
+const apolloServer = new ApolloServer({
   typeDefs,
   resolvers,
   context,
   dataSources,
   introspection: true,
-  playground: true,
+  playground: {
+    settings: {
+      'schema.polling.enable': false,
+    },
+  },
 });
 
-server.applyMiddleware({ app });
+apolloServer.applyMiddleware({ app, path: '/graphql' });
+
+const server = createServer(app);
 
 module.exports = {
   app,
