@@ -5,6 +5,7 @@ const models = require('../../database/models');
 
 beforeEach(async () => {
   await sequelize.truncate();
+  jest.setTimeout(10000);
 });
 
 describe('User Resolver', () => {
