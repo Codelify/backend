@@ -10,9 +10,9 @@ module.exports = {
     use_env_variable: 'DEV_DATABASE_URL',
   },
   test: {
-    username: 'test_user',
+    username: 'test_userfff',
     password: null,
-    database: 'test_db',
+    database: 'test_dbdd',
     host: '127.0.0.1',
     dialect: 'postgres',
   },
