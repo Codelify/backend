@@ -9,7 +9,6 @@
     "migrate": "sequelize-cli db:migrate",
     "sh": "node util/util.js",
     "migrate:reset": "sequelize-cli db:migrate:undo:all",
-    "pretest": "export NODE_ENV=test && npm run migrate:reset && sequelize-cli db:migrate",
     "test": "export NODE_ENV=test && jest --detectOpenHandles --testTimeout=10000 --forceExit",
     "coverage": "jest --coverage --detectOpenHandles  --testTimeout=10000 && cat ./coverage/lcov.info | coveralls --forceExit"
   },
