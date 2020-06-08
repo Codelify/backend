@@ -16,6 +16,7 @@ jobs:
            dialect: postgres
            NOT_NAME: lol
            TEST_DATABASE_URL: "postgres://postgres:postgres@localhost:5432/codelify"
+           SECRET_KEY: veryLongSuperSecretKey
       
       - image: circleci/postgres:11
         environment:
