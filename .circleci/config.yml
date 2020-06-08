@@ -12,10 +12,10 @@ jobs:
         environment:
            PGHOST: localhost
            PGUSER: postgres
-           NODE_ENV: production
+           NODE_ENV: test
            dialect: postgres
            NOT_NAME: lol
-           DATABASE_URL: "postgres://postgres:postgres@localhost:5432/codelify"
+           TEST_DATABASE_URL: "postgres://postgres:postgres@localhost:5432/codelify"
       
       - image: circleci/postgres:11
         environment:
