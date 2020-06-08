@@ -6,10 +6,10 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "migrate": "sequelize-cli db:migrate",
+    "migrate": "sequelize db:migrate",
     "sh": "node util/util.js",
     "migrate:reset": "sequelize-cli db:migrate:undo:all",
-    "test": "export NODE_ENV=test && jest --detectOpenHandles --forceExit",
+    "test": "npm run migrate && jest --detectOpenHandles --forceExit",
     "coverage": "jest --coverage --detectOpenHandles && cat ./coverage/lcov.info | coveralls --forceExit"
   },
   "author": "Chinedu Orie <nedsoftdeveloper@gmail.com>",
