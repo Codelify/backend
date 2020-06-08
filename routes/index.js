@@ -76,11 +76,12 @@ router.get('/slack/auth', async (req, res) => {
     } = await axios.get(
       `https://slack.com/api/oauth.access?client_id=${clientId}&client_secret=${secret}&code=${code}`,
     );
-    const {
-      id, email, name, image_72: avatar,
-    } = user;
+    const { id, email, name, image_72: avatar } = user;
     res.status(200).send({
-      id, email, name, avatar,
+      id,
+      email,
+      name,
+      avatar,
     });
   }
 });
@@ -115,14 +116,18 @@ router.post('/imagetotweet', async (req, res) => {
                     status: `Codelify image - ShareId ${shareId}`,
                     media_ids: media.media_id_string,
                   };
-                  twitterClient.post('statuses/update', status, (statusError, response) => {
-                    if (!statusError) {
-                      deleteImage(`${imagePath}.png`);
-                      res.status(200).json({
-                        message: response.entities.media[0].display_url,
-                      });
-                    }
-                  });
+                  twitterClient.post(
+                    'statuses/update',
+                    status,
+                    (statusError, response) => {
+                      if (!statusError) {
+                        deleteImage(`${imagePath}.png`);
+                        res.status(200).json({
+                          message: response.entities.media[0].display_url,
+                        });
+                      }
+                    },
+                  );
                 } else {
                   throw mediaError;
                 }
@@ -140,6 +145,10 @@ router.post('/imagetotweet', async (req, res) => {
     deleteImage(`${imagePath}.png`);
     res.status(500).json({ error: error.message });
   }
+});
+
+router.get('/test', (req, res) => {
+  res.status(200).json({ message: 'welcome' });
 });
 
 module.exports = router;
