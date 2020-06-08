@@ -25,7 +25,7 @@ describe('User Resolver', () => {
       const body = JSON.parse(res.text);
       expect(body).toHaveProperty('errors');
       expect(body.errors[0].message).toEqual('Invalid email specified');
-    });
+    }, 300000);
     it('should fail if password length is less than 6', async () => {
       const res = await graphqlQuery(`
           mutation {

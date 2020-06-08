@@ -28,7 +28,7 @@ describe('SNIPPETS', () => {
       expect(body.errors[0].message).toEqual(
         'Unauthorized Request, Authentication required',
       );
-    });
+    }, 300000);
 
     it('should fail if token is invalid', async () => {
       const response = await graphqlQuery(`
@@ -483,6 +483,6 @@ describe('SNIPPETS', () => {
       const body = JSON.parse(response.text);
       expect(body).toHaveProperty('data');
       expect(body.data.updateSnippet.title).toEqual('updated title');
-    });
+    }, 300000);
   });
 });
