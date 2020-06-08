@@ -9,8 +9,8 @@
     "migrate": "sequelize-cli db:migrate",
     "sh": "node util/util.js",
     "migrate:reset": "sequelize-cli db:migrate:undo:all",
-    "test": "export NODE_ENV=test && jest --detectOpenHandles --testTimeout=10000 --forceExit",
-    "coverage": "jest --coverage --detectOpenHandles  --testTimeout=10000 && cat ./coverage/lcov.info | coveralls --forceExit"
+    "test": "export NODE_ENV=test && jest --detectOpenHandles --forceExit",
+    "coverage": "jest --coverage --detectOpenHandles && cat ./coverage/lcov.info | coveralls --forceExit"
   },
   "author": "Chinedu Orie <nedsoftdeveloper@gmail.com>",
   "license": "MIT",
@@ -48,7 +48,8 @@
       "/models/*"
     ],
     "collectCoverage": true,
-    "verbose": true
+    "verbose": true,
+    "setupFilesAfterEnv": ["./jest.setup.js"]
   },
   "devDependencies": {
     "coveralls": "^3.1.0",
