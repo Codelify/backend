@@ -11,7 +11,7 @@
     "migrate:reset": "npx sequelize-cli db:migrate:undo:all",
     "pretest": "export NODE_ENV=test && npx sequelize-cli db:migrate",
     "test": "export NODE_ENV=test && jest --detectOpenHandles --testTimeout=10000 --forceExit",
-    "coverage": "jest --coverage --detectOpenHandles  --testTimeout=10000 && cat ./coverage/lcov.info | coveralls"
+    "coverage": "jest --coverage --detectOpenHandles  --testTimeout=10000 && cat ./coverage/lcov.info | coveralls --forceExit"
   },
   "author": "Chinedu Orie <nedsoftdeveloper@gmail.com>",
   "license": "MIT",

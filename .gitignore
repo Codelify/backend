@@ -57,5 +57,4 @@ yarn.lock
 # dotenv environment variables file
 .env
 .DS_Store
-./.docker/dev/.dev.env
-.
+.docker/dev/.dev.env
