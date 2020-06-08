@@ -7,7 +7,6 @@ module.exports = {
     database: process.env.DEV_DB_NAME,
     host: '127.0.0.1',
     dialect: 'postgres',
-    operatorsAliases: false,
     use_env_variable: 'DEV_DATABASE_URL',
   },
   test: {
@@ -16,7 +15,6 @@ module.exports = {
     database: process.env.TEST_DB_NAME,
     host: '127.0.0.1',
     dialect: 'postgres',
-    operatorsAliases: false,
     use_env_variable: '',
   },
   production: {
@@ -25,7 +23,6 @@ module.exports = {
     database: process.env.DB_NAME,
     host: '127.0.0.1',
     dialect: 'postgres',
-    operatorsAliases: false,
     use_env_variable: 'DATABASE_URL',
   },
 };
