@@ -1,7 +1,7 @@
 const { skip } = require('graphql-resolvers');
-const { AuthenticationError } = require('apollo-server-express');
+const { AuthenticationError, UserInputError } = require('apollo-server-express');
+const { isEmail } = require('validator');
 const { verifyUserToken } = require('../helpers/jwt');
-
 /**
  *
  *
@@ -20,6 +20,15 @@ const isAuthenticated = async (_, { token = '' }) => {
   return skip;
 };
 
+const validateRegistration = (_, { input: { email, password } }) => {
+  if (!email || !isEmail(email)) {
+    throw new UserInputError('Invalid email specified');
+  } else if (!password || password.length < 6) {
+    throw new UserInputError('The password length must be at least 6 characters');
+  } else return skip;
+};
+
 module.exports = {
   isAuthenticated,
+  validateRegistration,
 };

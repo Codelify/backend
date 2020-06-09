@@ -1,0 +1,1 @@
+[![CircleCI](https://circleci.com/gh/Codelify/backend.svg?style=svg)](https://circleci.com/gh/Codelify/backend) [![Coverage Status](https://coveralls.io/repos/github/Codelify/backend/badge.svg?branch=master)](https://coveralls.io/github/Codelify/backend?branch=master)

@@ -1,6 +1,6 @@
 const { combineResolvers } = require('graphql-resolvers');
-const { isAuthenticated } = require('../middleware/auth');
-const { validateCreateSnippet } = require('../middleware/snippetValidator');
+const { isAuthenticated } = require('../../middleware/auth');
+const { validateCreateSnippet } = require('../../middleware/snippetValidator');
 
 const snippetResolver = {
   Query: {

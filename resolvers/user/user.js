@@ -1,5 +1,5 @@
 const { combineResolvers } = require('graphql-resolvers');
-const { isAuthenticated } = require('../middleware/auth');
+const { isAuthenticated, validateRegistration } = require('../../middleware/auth');
 
 const userResolver = {
   Query: {
@@ -17,9 +17,10 @@ const userResolver = {
   },
 
   Mutation: {
-    async register(_, { input: userData }, { dataSources: { User } }) {
-      return User.register(userData);
-    },
+    register: combineResolvers(
+      validateRegistration,
+      async (_, { input: userData }, { dataSources: { User } }) => User.register(userData),
+    ),
     async login(_, { input: userData }, { dataSources: { User } }) {
       return User.login(userData);
     },

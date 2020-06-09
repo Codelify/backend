@@ -1,7 +1,7 @@
 const { GraphQLScalarType } = require('graphql/type');
 const { Kind } = require('graphql/language');
-const userResolver = require('../resolvers/user');
-const snippetResolver = require('../resolvers/snippet');
+const userResolver = require('./user/user');
+const snippetResolver = require('./snippet/snippet');
 
 const dateResolver = {
   DateTime: new GraphQLScalarType({
