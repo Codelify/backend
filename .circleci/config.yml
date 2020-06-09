@@ -68,4 +68,4 @@ jobs:
 
       # run tests!
       - run: npm test
-      - run: npm coverage
+      - run: npm run coverage
