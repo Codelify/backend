@@ -1,1 +1,1 @@
-[![Build Status](https://travis-ci.org/Codelify/backend.svg?branch=master)](https://travis-ci.org/Codelify/backend) [![Coverage Status](https://coveralls.io/repos/github/Codelify/backend/badge.svg?branch=master)](https://coveralls.io/github/Codelify/backend?branch=master)
+[![CircleCI](https://circleci.com/gh/Codelify/Backend.svg?style=svg)](https://circleci.com/gh/Codelify/Backend) [![Coverage Status](https://coveralls.io/repos/github/Codelify/backend/badge.svg?branch=master)](https://coveralls.io/github/Codelify/backend?branch=master)
